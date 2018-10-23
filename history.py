@@ -28,6 +28,13 @@ def daily(code):
     df = ts.pro_bar(pro_api=pro, ts_code=code, adj='qfq')
     return jsonify(data=df.values.tolist()) 
 
+# @app.route('/daily/<code>/<dt>')
+# def daily(code,dt):
+#     ts.set_token('ded567c8b305a3ed36fb2b12b15ca0209a9d93f5880be42822234fa6')
+#     pro = ts.pro_api()
+#     df = ts.pro_bar(ts_code=code,pro_api=pro,start_date=dt, adj='qfq')
+#     return jsonify(data=df.values.tolist()) 
+
 @app.route('/allstock')
 def allstock():
     ts.set_token('ded567c8b305a3ed36fb2b12b15ca0209a9d93f5880be42822234fa6')
