@@ -8,6 +8,8 @@ from flask import Flask
 import tushare as ts
 from flask import jsonify
 from flask_cors import CORS
+from common import calIndexDelta
+from common import indexList
 
 app = Flask(__name__)
 CORS(app)
@@ -28,12 +30,14 @@ def daily(code):
     df = ts.pro_bar(pro_api=pro, ts_code=code, adj='qfq')
     return jsonify(data=df.values.tolist()) 
 
-# @app.route('/daily/<code>/<dt>')
-# def daily(code,dt):
-#     ts.set_token('ded567c8b305a3ed36fb2b12b15ca0209a9d93f5880be42822234fa6')
-#     pro = ts.pro_api()
-#     df = ts.pro_bar(ts_code=code,pro_api=pro,start_date=dt, adj='qfq')
-#     return jsonify(data=df.values.tolist()) 
+@app.route('/daily/<code>/<dt>')
+def dailyDate(code,dt):
+    dt=dt.replace('-','');
+    dt=dt.replace('/','');
+    ts.set_token('ded567c8b305a3ed36fb2b12b15ca0209a9d93f5880be42822234fa6')
+    pro = ts.pro_api()
+    df = ts.pro_bar(ts_code=code,pro_api=pro,start_date=dt, adj='qfq')
+    return jsonify(data=df.values.tolist()) 
 
 @app.route('/allstock')
 def allstock():
@@ -43,5 +47,11 @@ def allstock():
     df = pro.stock_basic(exchange_id='', list_status='L', fields='ts_code,name,enname,exchange_id,fullname')
     return jsonify(data=df.values.tolist()) 
 
+@app.route('/indexDelta/<indexCode>')
+def indexDelta(indexCode):
+    return jsonify(calIndexDelta(indexCode))
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=8001)
+
+
