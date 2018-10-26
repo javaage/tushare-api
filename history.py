@@ -9,6 +9,7 @@ import tushare as ts
 from flask import jsonify
 from flask_cors import CORS
 from common import calIndexDelta
+from common import calStockDelta
 from common import indexList
 
 app = Flask(__name__)
@@ -50,6 +51,10 @@ def allstock():
 @app.route('/indexDelta/<indexCode>')
 def indexDelta(indexCode):
     return jsonify(calIndexDelta(indexCode))
+
+@app.route('/stockDelta/<indexCode>')
+def stockDelta(indexCode):
+    return jsonify(calStockDelta(indexCode))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=8001)
