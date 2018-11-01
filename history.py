@@ -11,6 +11,10 @@ from flask_cors import CORS
 from common import calIndexDelta
 from common import calStockDelta
 from common import indexList
+from ichess import *
+from ichessSchema import *
+import json
+
 
 app = Flask(__name__)
 CORS(app)
@@ -52,9 +56,32 @@ def allstock():
 def indexDelta(indexCode):
     return jsonify(calIndexDelta(indexCode))
 
-@app.route('/stockDelta/<indexCode>')
-def stockDelta(indexCode):
-    return jsonify(calStockDelta(indexCode))
+@app.route('/stockDelta/<stockCode>')
+def stockDelta(stockCode):
+    return jsonify(calStockDelta(stockCode))
+
+@app.route('/indexWeight/<indexCode>')
+def indexWeight(indexCode):
+    ts.set_token('ded567c8b305a3ed36fb2b12b15ca0209a9d93f5880be42822234fa6')
+    pro = ts.pro_api()
+    df = pro.index_weight(index_code=indexCode, fields='con_code') 
+    return jsonify(df.values.tolist())
+
+@app.route('/wavestock/<stockCode>')
+def wavestock(stockCode):
+    query = Wavestock.select().where(Wavestock.code == stockCode);
+    if(query):
+        stock = query.get()
+        return WavestockSchema().dumps(stock)
+    return ""
+
+@app.route('/waveindex/<indexCode>')
+def waveindex(indexCode):
+    query = Waveindex.select().where(Waveindex.code == indexCode);
+    if(query):
+        stock = query.get()
+        return WaveindexSchema().dumps(stock)
+    return ""
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=8001)
