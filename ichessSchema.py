@@ -1,12 +1,14 @@
 from marshmallow import Schema, fields
 
 class AllstockSchema(Schema):
+    id = fields.Integer()
     code = fields.Str()
     name = fields.Str()
     py = fields.Str()
 
 
 class AttendSchema(Schema):
+    id = fields.Integer()
     ascrate = fields.Float()
     code = fields.Str()
     descrate = fields.Float()
@@ -16,6 +18,7 @@ class AttendSchema(Schema):
 
 
 class BkrecordSchema(Schema):
+    id = fields.Integer()
     code = fields.Str()
     date = fields.DateTime()
     increase = fields.Float()
@@ -24,6 +27,7 @@ class BkrecordSchema(Schema):
 
 
 class CandRateSchema(Schema):
+    id = fields.Integer()
     a = fields.Float()
     b = fields.Float()
     code = fields.Str()
@@ -40,6 +44,7 @@ class CandidateSchema(Schema):
 
 
 class CategorySchema(Schema):
+    id = fields.Integer()
     code = fields.Str()
     content = fields.Str()
     name = fields.Str()
@@ -47,6 +52,7 @@ class CategorySchema(Schema):
 
 
 class Collect(Schema):
+    id = fields.Integer()
     code = fields.Str()
     date = fields.DateTime()
     flag = fields.Integer()
@@ -54,6 +60,7 @@ class Collect(Schema):
 
 
 class Crecord(Schema):
+    id = fields.Integer()
     code = fields.Str()
     date = fields.DateTime()
     increase = fields.Float()
@@ -61,6 +68,7 @@ class Crecord(Schema):
     time = fields.Str()
 
 class Daily(Schema):
+    id = fields.Integer()
     clmn = fields.Float()
     code = fields.Str()
     current = fields.Float()
@@ -70,6 +78,7 @@ class Daily(Schema):
     open = fields.Float()
 
 class DailyRateSchema(Schema):
+    id = fields.Integer()
     a = fields.Float()
     b = fields.Float()
     code = fields.Str()
@@ -77,6 +86,7 @@ class DailyRateSchema(Schema):
     r = fields.Float()
 
 class DirectorSchema(Schema):
+    id = fields.Integer()
     arrow = fields.Str()
     code = fields.Str()
     level = fields.Integer()
@@ -87,6 +97,7 @@ class DirectorSchema(Schema):
     type = fields.Str()
 
 class HistorySchema(Schema):
+    id = fields.Integer()
     ftime = fields.Str()
     id = fields.Str()
     ltime = fields.Str()
@@ -94,6 +105,7 @@ class HistorySchema(Schema):
     type = fields.Str()
 
 class HolderSchema(Schema):
+    id = fields.Integer()
     ascrate = fields.Float()
     code = fields.Str()
     descrate = fields.Float()
@@ -102,10 +114,12 @@ class HolderSchema(Schema):
     time = fields.Str()
 
 class IchessTestSchema(Schema):
+    id = fields.Integer()
     age = fields.Integer()
     name = fields.Str()
 
 class IndexrecordSchema(Schema):
+    id = fields.Integer()
     avg = fields.Float()
     clmn = fields.Float()
     close = fields.Float()
@@ -120,6 +134,7 @@ class IndexrecordSchema(Schema):
     time = fields.Integer()
 
 class InspectSchema(Schema):
+    id = fields.Integer()
     code = fields.Str()
     create_date = fields.Str()
     flag = fields.Integer()
@@ -129,6 +144,7 @@ class InspectSchema(Schema):
     value = fields.Float()
 
 class MessageSchema(Schema):
+    id = fields.Integer()
     code = fields.Str()
     flag = fields.Integer()
     message = fields.Str()
@@ -136,6 +152,7 @@ class MessageSchema(Schema):
     time = fields.Str()
 
 class SignSchema(Schema):
+    id = fields.Integer()
     buy = fields.Integer()
     code = fields.Str()
     concept = fields.Str()
@@ -147,6 +164,7 @@ class SignSchema(Schema):
     sell = fields.Integer()
 
 class StockactionSchema(Schema):
+    id = fields.Integer()
     action = fields.Str()
     arrow = fields.Str()
     content = fields.Str()
@@ -163,6 +181,7 @@ class StockactionSchema(Schema):
     type = fields.Str()
 
 class StockrecordSchema(Schema):
+    id = fields.Integer()
     avg = fields.Float()
     clmn = fields.Float()
     close = fields.Float()
@@ -177,11 +196,13 @@ class StockrecordSchema(Schema):
     time = fields.Integer()
 
 class TestTableSchema(Schema):
+    id = fields.Integer()
     age = fields.Integer()
     name = fields.Str()
     time = fields.DateTime()
 
 class WavedailySchema(Schema):
+    id = fields.Integer()
     ac = fields.Integer()
     arrow = fields.Str()
     code = fields.Str()
@@ -189,6 +210,7 @@ class WavedailySchema(Schema):
     gw = fields.Str()
 
 class WaveindexSchema(Schema):
+    id = fields.Integer()
     ac = fields.Integer()
     arrow = fields.Str()
     code = fields.Str()
@@ -201,6 +223,7 @@ class WaveindexSchema(Schema):
     time = fields.Integer()
 
 class WaverecordSchema(Schema):
+    id = fields.Integer()
     ac = fields.Integer()
     arrow = fields.Str()
     code = fields.Str()
@@ -209,6 +232,7 @@ class WaverecordSchema(Schema):
     wv = fields.Str()
 
 class WavestockSchema(Schema):
+    id = fields.Integer()
     ac = fields.Integer()
     arrow = fields.Str()
     code = fields.Str()
@@ -221,6 +245,7 @@ class WavestockSchema(Schema):
     time = fields.Integer()
 
 class WeakSchema(Schema):
+    id = fields.Integer()
     ascrate = fields.Float()
     code = fields.Str()
     descrate = fields.Float()

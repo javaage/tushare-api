@@ -1,0 +1,2 @@
+def calIndexDelta():
+    return true

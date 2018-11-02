@@ -2,6 +2,15 @@
 
 import tushare as ts
 import pandas as pd
+import json
+
+def sucess_response(result=None):
+    result={'code':1,'data':result,'message':'success'}
+    return json.dumps(result)
+
+def fail_response(result=None):
+    result={'code':-1,'data':result,'message':'failed'}
+    return json.dumps(result)
 
 def calIndexDelta(indexCode, indexCodeBase='399001.SZ'):
     ts.set_token('ded567c8b305a3ed36fb2b12b15ca0209a9d93f5880be42822234fa6')
