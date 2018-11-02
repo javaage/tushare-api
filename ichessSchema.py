@@ -51,7 +51,7 @@ class CategorySchema(Schema):
     type = fields.Str()
 
 
-class Collect(Schema):
+class CollectSchema(Schema):
     id = fields.Integer()
     code = fields.Str()
     date = fields.DateTime()
@@ -59,7 +59,7 @@ class Collect(Schema):
     name = fields.Str()
 
 
-class Crecord(Schema):
+class CrecordSchema(Schema):
     id = fields.Integer()
     code = fields.Str()
     date = fields.DateTime()
@@ -67,7 +67,7 @@ class Crecord(Schema):
     name = fields.Str()
     time = fields.Str()
 
-class Daily(Schema):
+class DailySchema(Schema):
     id = fields.Integer()
     clmn = fields.Float()
     code = fields.Str()
