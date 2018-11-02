@@ -11,8 +11,8 @@ from flask_cors import CORS
 from common import *
 from ichessSchema import *
 import json
-from dao.candidateDao import *
 
+from dao.candidateDao import *
 import dao.holderDao as holderDao
 import dao.allstockDao as allstockDao
 import dao.attendDao as attendDao
