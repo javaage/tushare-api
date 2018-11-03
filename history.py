@@ -70,7 +70,7 @@ def allstock():
     ts.set_token('ded567c8b305a3ed36fb2b12b15ca0209a9d93f5880be42822234fa6')
     pro = ts.pro_api()
 #     df = pro.daily(ts_code=code)
-    df = pro.stock_basic(exchange_id='', list_status='L', fields='ts_code,name,enname,exchange_id,fullname')
+    df = pro.stock_basic(exchange_id='', list_status='L', fields='ts_code,name,enname,exchange,fullname')
     return jsonify(data=df.values.tolist()) 
 
 @app.route('/indexDelta/<indexCode>')
