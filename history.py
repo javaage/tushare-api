@@ -41,6 +41,7 @@ app = Flask(__name__)
 CORS(app)
 # CORS(app, supports_credentials=True)
 
+#Test
 @app.route('/')
 def hello_world():
     ts.set_token('ded567c8b305a3ed36fb2b12b15ca0209a9d93f5880be42822234fa6')
@@ -73,9 +74,21 @@ def allstock():
     df = pro.stock_basic(exchange_id='', list_status='L', fields='ts_code,name,enname,exchange,fullname')
     return jsonify(data=df.values.tolist()) 
 
+@app.route('/updatestock')
+def allstock():
+    ts.set_token('ded567c8b305a3ed36fb2b12b15ca0209a9d93f5880be42822234fa6')
+    pro = ts.pro_api()
+#     df = pro.daily(ts_code=code)
+    df = pro.stock_basic(exchange_id='', list_status='L') #, fields='ts_code,name,enname,exchange,fullname'
+    return jsonify(data=df.values.tolist()) 
+
 @app.route('/indexDelta/<indexCode>')
 def indexDelta(indexCode):
     return jsonify(calIndexDelta(indexCode))
+
+@app.route('/indexCompare/<indexs>/<dtStart>')
+def indexCompare(indexs,dtStart):
+    return jsonify(compareIndexDelta(indexs,dtStart))
 
 @app.route('/stockDelta/<stockCode>')
 def stockDelta(stockCode):
