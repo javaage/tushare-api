@@ -71,12 +71,35 @@ def compareIndexDelta(indexs, dtStart='19800101', indexCodeBase='399001.SZ'):
         expr = '%s=closeMulti-close_x'%(name)
         indexNames.append(name)
         df_base_slice.eval(expr, inplace=True)
-        
-        exclude = ['close_y', 'closeMulti']
+        exclude = ['close', 'close_y', 'closeMulti']
         df_base_slice = df_base_slice[df_base_slice.columns.difference(exclude)]
-    
     columns = ['trade_date','close_x'] + indexNames
     df_base_slice = df_base_slice[columns]
-    
     return df_base_slice.round(2).values.tolist()
-#['trade_date', 'close_x', 'delta', 'close_y', 'closeMulti']
+
+def compareStockDelta(indexs, dtStart='19800101', indexCodeBase='399001.SZ'):
+    ts.set_token('ded567c8b305a3ed36fb2b12b15ca0209a9d93f5880be42822234fa6')
+    indexNames = []
+    indexList = indexs.split(',');
+    pro = ts.pro_api()
+    
+    df_base = pro.index_daily(ts_code=indexCodeBase, start_date=dtStart)
+    df_base_slice = df_base[['trade_date', 'close']]
+    weight_base = df_base_slice[['close']].apply(lambda x: x.max() + x.min())
+    
+    for indexCode in indexList:
+        df_compare = ts.pro_bar(ts_code=indexCode,pro_api=pro, start_date=dtStart, adj='qfq')
+        df_compare_slice = df_compare[['trade_date', 'close']]
+        weight_compare = df_compare_slice[['close']].apply(lambda x: x.max() + x.min())
+        factor = weight_base.values[0] / weight_compare.values[0]
+        df_compare_slice = df_compare_slice.assign(closeMulti=lambda x: x.close * factor)
+        df_base_slice = pd.merge(df_base_slice, df_compare_slice, how='inner', on='trade_date')
+        name = indexCode[7:] + indexCode[0:6]
+        expr = '%s=closeMulti-close_x'%(name)
+        indexNames.append(name)
+        df_base_slice.eval(expr, inplace=True)
+        exclude = ['close', 'close_y', 'closeMulti']
+        df_base_slice = df_base_slice[df_base_slice.columns.difference(exclude)]
+    columns = ['trade_date','close_x'] + indexNames
+    df_base_slice = df_base_slice[columns]
+    return df_base_slice.round(2).values.tolist()

@@ -90,6 +90,10 @@ def indexDelta(indexCode):
 def indexCompare(indexs,dtStart):
     return jsonify(compareIndexDelta(indexs,dtStart))
 
+@app.route('/stockCompare/<indexs>/<dtStart>')
+def stockCompare(indexs,dtStart):
+    return jsonify(compareStockDelta(indexs,dtStart))
+
 @app.route('/stockDelta/<stockCode>')
 def stockDelta(stockCode):
     return jsonify(calStockDelta(stockCode))
